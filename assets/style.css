@@ -1,3 +1,160 @@
-html {
-    background-color: #f5f5f5;
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+
+/* ---- Base theme colors ---- */
+:root {
+    /* ---- Base: warm neutrals (beige/paper, not gray) ---- */
+    --paper-0:  #FDFCF8;   /* lightest — cards, raised surfaces */
+    --paper-50: #F9F5EC;   /* app background */
+    --paper-100:#F1EADA;   /* subtle fill / hover surface */
+    --paper-200:#E2D7C2;   /* borders, dividers */
+    --paper-300:#CDBEA0;   /* stronger borders, disabled edges */
+    --paper-400:#A99878;   /* muted icons, placeholders */
+
+    /* ---- Base: warm ink (never pure black) ---- */
+    --ink-900: #24201A;    /* primary text */
+    --ink-700: #4A4238;    /* secondary text */
+    --ink-500: #766B5A;    /* tertiary / meta text */
+    --ink-300: #A89C87;    /* disabled text */
+
+    /* ---- Base: accent — orange, used sparingly ---- */
+    --orange-700: #B3410C; /* pressed / text-on-light accent */
+    --orange-600: #D14E11; /* hover */
+    --orange-500: #E8590C; /* accent — links, CTAs, focus */
+    --orange-100: #FBE2CF; /* accent tint — chips, selected fill */
+
+    /* ---- Semantic aliases ---- */
+    --bg-page:          var(--paper-50);
+    --bg-surface:       var(--paper-0);
+    --bg-surface-hover: var(--paper-100);
+    --border-subtle:    var(--paper-200);
+    --border-strong:    var(--paper-300);
+
+    --text-primary:   var(--ink-900);
+    --text-secondary: var(--ink-700);
+    --text-tertiary:  var(--ink-500);
+    --text-disabled:  var(--ink-300);
+    --text-on-accent: var(--paper-0);
+
+    --accent:         var(--orange-500);
+    --accent-hover:   var(--orange-600);
+    --accent-active:  var(--orange-700);
+    --accent-tint:    var(--orange-100);
+
+    --focus-ring:     var(--orange-500);
+}
+
+/* ---- Base theme typography ---- */
+:root {
+    --font-display: "Newsreader", Georgia, serif;
+    --font-body:    "Archivo", -apple-system, "Segoe UI", sans-serif;
+    --font-mono:    "JetBrains Mono", "SF Mono", monospace;
+
+    /* Type scale — deliberately asymmetric: one dominant display size, then a
+        tight cluster of small text sizes. No mid-size "H2/H3" ladder — the
+        hierarchy is display vs. everything else. */
+    --text-display: 2rem; /* @kind other */
+    --text-title:   1.125rem;   /* role / title line */
+    --text-body:    1.0625rem;  /* running copy */
+    --text-label:   0.9375rem;  /* links, list items */
+    --text-meta:    0.8125rem;  /* eyebrow, meta, mono accents */
+
+    --leading-display: 1.05;
+    --leading-title:   1.35;
+    --leading-body:    1.6;
+    --leading-label:   1.4;
+
+    --tracking-display: -0.01em;
+    --tracking-meta:    0.08em;  /* wide tracking on uppercase mono/meta only */
+
+    --weight-regular:  400;
+    --weight-medium:   500;
+    --weight-semibold: 600;
+    --weight-bold:     700;
+}
+
+/* ---- Spacing and layout ---- */
+:root {
+    --width-heading: 440px; /* max width of content column */
+    --width-content: 640px; /* max width of content column */
+
+    /* Spacing — base 4px, used generously; the page relies on whitespace
+        rather than dividers or cards to separate sections. */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
+    --space-10: 144px;
+
+    /* Radius — small and consistent; nothing pill-shaped, nothing sharp */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+
+    /* Border widths */
+    --border-thin: 1px;
+    --border-thick: 1.5px;
+
+    /* Shadow — one soft, low-elevation shadow only. No glow, no colored shadow. */
+    --shadow-card: 0 1px 2px rgba(36, 32, 26, 0.04), 0 4px 12px rgba(36, 32, 26, 0.05);
+
+    /* Motion — quick, no bounce. Underlines/opacity only. */
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+    --duration-fast: 120ms; /* @kind other */
+    --duration-base: 180ms; /* @kind other */
+}
+
+/* ---- Base theme layout ---- */
+body {
+    height: 100%;
+    width: 100%;
+
+    margin: 0;
+
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+
+    font-family: var(--font-body);
+}
+
+main {
+    max-width: var(--width-content);
+    margin: 0 auto;
+
+    padding: var(--space-9) var(--space-5);
+}
+
+/* ---- Components ---- */
+.heading {
+    max-width: var(--width-heading);
+}
+
+.heading-display {
+    margin: 0 0 var(--space-2) 0;
+
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+}
+
+.heading-role {
+    margin: 0 0 var(--space-4) 0;
+
+    color: var(--text-secondary);
+    font-size: var(--text-title);
+    font-weight: var(--weight-medium);
+}
+
+.heading-description {
+    margin: 0 0 var(--space-9) 0;
+
+    color: var(--text-secondary);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
 }
