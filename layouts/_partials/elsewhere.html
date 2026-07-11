@@ -1,0 +1,6 @@
+<h2 class="section-heading text-subtle">Elsewhere</h2>
+<ul class="elsewhere-list">
+{{ range .Site.Params.elsewhere }}
+    <li><a href="{{ .url }}">{{ .title }}</a></li>
+{{ end }}
+</ul>

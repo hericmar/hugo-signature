@@ -1,0 +1,9 @@
+<h2 class="section-heading text-subtle">Projects</h2>
+<ul class="projects-list">
+{{ range .Site.Params.projects }}
+    <li>
+        <a class="text-emphasized" href="{{ .url }}">{{ .title }}</a>
+        <p class="project-description">{{ .description }}</p>
+    </li>
+{{ end }}
+</ul>

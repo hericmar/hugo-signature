@@ -5,5 +5,22 @@
         <p class="heading-role">{{ .Site.Params.subtitle }}</p>
         <p class="heading-description">{{ .Site.Params.description }}</p>
     </header>
+    {{ if .Site.Params.projects }}
+    <section class="section-content">
+        {{ partial "projects.html" . }}
+    </section>
+    {{ end }}
+    <!--
+    {{ with (where site.RegularPages "Section" "writing").ByDate.Reverse }}
+    <section class="section-content">
+        {{ partial "writing.html" . }}
+    </section>
+    {{ end }}
+    -->
+    {{ if .Site.Params.elsewhere }}
+    <section class="section-content">
+        {{ partial "elsewhere.html" . }}
+    </section>
+    {{ end }}
 </main>
 {{ end }}
