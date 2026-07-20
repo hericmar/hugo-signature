@@ -1,0 +1,7 @@
+<h2 class="section-heading text-subtle">Writing</h2>
+{{ range . }}
+    <article class="writing-item">
+        <h3 class="writing-title text-emphasized"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <span class="writing-date text-subtle">{{ .Date.Format "January, 2006" }}</span>
+    </article>
+{{ end }}

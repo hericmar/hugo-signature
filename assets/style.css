@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
 /* ---- Base theme colors ---- */
 :root {
     /* ---- Base: neutral paper (pure white base) ---- */
@@ -45,7 +44,7 @@
 
 /* ---- Base theme typography ---- */
 :root {
-    --font-display: "Newsreader", Georgia, serif;
+    --font-heading: "Newsreader", Georgia, serif;
     --font-body:    "Archivo", -apple-system, "Segoe UI", sans-serif;
     --font-mono:    "JetBrains Mono", "SF Mono", monospace;
 
@@ -78,6 +77,11 @@
 :root {
     --width-heading: 440px; /* max width of content column */
     --width-content: 640px; /* max width of content column */
+    --width-post-title: calc(var(--width-content) - 40px); /* post title block */
+
+    /* Gap between major page sections. Off the 4px scale below, but it is the
+       value the design uses consistently between sections. */
+    --space-section: 56px;
 
     /* Spacing — base 4px, used generously; the page relies on whitespace
         rather than dividers or cards to separate sections. */
@@ -132,6 +136,9 @@ main {
 
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
+
+    font-family: var(--font-heading);
+    font-weight: var(--weight-regular);
 }
 
 a {
@@ -156,7 +163,6 @@ a {
 .heading-display {
     margin: 0 0 var(--space-3) 0;
 
-    font-family: var(--font-display);
     font-size: var(--text-display);
     font-weight: var(--weight-regular);
     line-height: var(--leading-display);
@@ -186,6 +192,7 @@ a {
 
 .section-heading {
     margin: 0 0 var(--space-3) 0;
+    font-family: var(--font-body);
 }
 
 .projects-list {
@@ -211,11 +218,8 @@ a {
 }
 
 .writing-title {
-
-}
-
-.writing-date {
-
+    font-family: var(--font-body);
+    font-weight: var(--weight-regular);
 }
 
 .elsewhere-list {
@@ -254,4 +258,132 @@ a {
     outline: var(--border-thick) solid var(--focus-ring);
     outline-offset: var(--space-1);
     border-radius: var(--radius-sm);
+}
+
+/* ---- Writing post ----
+   Everything is nested inside .post, so none of these rules can reach the
+   index page. Mirrors templates/writing-post/WritingPost.dc.html. */
+.post {
+    .post-back {
+        display: inline-block;
+
+        color: var(--text-tertiary);
+        font-size: var(--text-body);
+    }
+
+    .post-header {
+        margin-top: var(--space-6);
+        max-width: var(--width-post-title);
+    }
+
+    .post-title {
+        margin: 0;
+
+        font-family: var(--font-heading);
+        font-size: var(--text-display);
+        font-weight: var(--weight-regular);
+        line-height: var(--leading-display);
+    }
+
+    .post-meta {
+        margin-top: var(--space-3);
+
+        color: var(--text-tertiary);
+        font-size: var(--text-body);
+    }
+
+    /* Prose body — element selectors here are safe because Hugo's .Content
+       emits bare tags, and the nesting keeps them inside .post. */
+    .post-body {
+        margin-top: var(--space-section);
+
+        p {
+            margin: 0 0 var(--space-5) 0;
+
+            color: var(--text-secondary);
+            font-size: var(--text-body);
+            line-height: var(--leading-body);
+        }
+
+        /* Lists inherit the paragraph's prose treatment. The reference template
+           has no list spec, so these extend the paragraph style. */
+        ul, ol {
+            margin: 0 0 var(--space-5) 0;
+            padding-left: var(--space-5);
+
+            color: var(--text-secondary);
+            font-size: var(--text-body);
+            line-height: var(--leading-body);
+        }
+
+        li {
+            margin: 0 0 var(--space-2) 0;
+        }
+
+        li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Nested lists: no extra bottom gap, tighter rhythm. */
+        li > ul,
+        li > ol {
+            margin: var(--space-2) 0 0 0;
+        }
+
+        h2, h3, h4, h5 {
+            margin: 40px 0 var(--space-4) 0;
+
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-size: var(--text-body);
+            font-weight: var(--weight-medium);
+        }
+
+        h2 {
+            font-size: var(--text-title);
+        }
+
+        pre {
+            margin: 0 0 var(--space-5) 0;
+            padding: var(--space-4);
+            overflow-x: auto;
+
+            background: var(--paper-100);
+            border: var(--border-thin) solid var(--border-subtle);
+            border-radius: var(--radius-md);
+
+
+            white-space: pre;
+        }
+
+        pre code {
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+    }
+
+    .post-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-4);
+
+        margin-top: var(--space-8);
+        padding-top: var(--space-5);
+        border-top: var(--border-thin) solid var(--border-subtle);
+
+        a {
+            max-width: 48%;
+
+            color: var(--text-secondary);
+            font-size: var(--text-body);
+        }
+
+        /* Keeps "next" hard right even when there is no "prev" beside it. */
+        .post-nav-next {
+            margin-left: auto;
+            text-align: right;
+        }
+    }
 }
