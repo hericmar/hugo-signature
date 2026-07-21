@@ -10,9 +10,12 @@ than being discovered later in a real post.&lt;/p&gt;
 &lt;h2 id="text-formatting"&gt;Text formatting&lt;/h2&gt;
 &lt;p&gt;Running copy can be &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, &lt;em&gt;&lt;strong&gt;bold and italic&lt;/strong&gt;&lt;/em&gt;, or
 &lt;del&gt;struck through&lt;/del&gt;. Inline &lt;code&gt;code&lt;/code&gt; sits in the monospace face, and a
-&lt;a href="https://hericmar.github.io/hugo-signature/writing/moving-off-kubernetes/"&gt;link to another post&lt;/a&gt; points inside the site
-while &lt;a href="https://gohugo.io/"&gt;an external link&lt;/a&gt; leaves it. Bare URLs autolink too:
-&lt;a href="https://gohugo.io/documentation/"&gt;https://gohugo.io/documentation/&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>A smaller way to think about queues</title><link>https://hericmar.github.io/hugo-signature/writing/smaller-way-to-think-about-queues/</link><pubDate>Sat, 02 May 2026 00:00:00 +0000</pubDate><guid>https://hericmar.github.io/hugo-signature/writing/smaller-way-to-think-about-queues/</guid><description>&lt;p&gt;Most queue outages I have debugged were not throughput problems. They were
+&lt;a href="https://hericmar.github.io/hugo-signature/writing/moving-off-kubernetes/"&gt;link to another post&lt;/a&gt;
+ points inside the site
+while &lt;a href="https://gohugo.io/"&gt;an external link&lt;/a&gt;
+ leaves it. Bare URLs autolink too:
+&lt;a href="https://gohugo.io/documentation/"&gt;https://gohugo.io/documentation/&lt;/a&gt;
+.&lt;/p&gt;</description></item><item><title>A smaller way to think about queues</title><link>https://hericmar.github.io/hugo-signature/writing/smaller-way-to-think-about-queues/</link><pubDate>Sat, 02 May 2026 00:00:00 +0000</pubDate><guid>https://hericmar.github.io/hugo-signature/writing/smaller-way-to-think-about-queues/</guid><description>&lt;p&gt;Most queue outages I have debugged were not throughput problems. They were
 someone discovering, at the worst possible moment, that a job was not
 idempotent.&lt;/p&gt;
 &lt;h2 id="two-properties-worth-more-than-speed"&gt;Two properties worth more than speed&lt;/h2&gt;
