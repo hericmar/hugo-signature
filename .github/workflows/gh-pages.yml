@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
 
 # peaceiris/actions-gh-pages pushes to the gh-pages branch with GITHUB_TOKEN.
 permissions:
