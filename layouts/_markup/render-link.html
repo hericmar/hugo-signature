@@ -1,0 +1,14 @@
+{{- /*
+  Link render hook — same subpath problem as render-image.html. Root-relative
+  destinations get the baseURL's path prefix; absolute URLs, fragments
+  (#footnotes) and page-relative paths are left as written.
+*/ -}}
+{{- $prefix := (urls.Parse site.BaseURL).Path -}}
+{{- $href := .Destination -}}
+{{- if strings.HasPrefix $href "/" -}}
+  {{- /* path.Join drops a trailing slash; keep it so the link hits the page
+         directly instead of taking a 301 to the canonical form. */ -}}
+  {{- $slash := cond (strings.HasSuffix $href "/") "/" "" -}}
+  {{- $href = printf "%s%s" (path.Join $prefix $href) $slash -}}
+{{- end -}}
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>

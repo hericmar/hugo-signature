@@ -1,0 +1,14 @@
+{{- /*
+  Image render hook.
+
+  Hugo leaves paths written literally in markdown alone, so `![](/img/x.svg)`
+  breaks when the site is served from a subpath. Prepend the baseURL's path
+  prefix — the "<prefix>" in example.com/<prefix>/ — to root-relative paths.
+  Absolute URLs and page-relative paths are left as written.
+*/ -}}
+{{- $prefix := (urls.Parse site.BaseURL).Path -}}
+{{- $src := .Destination -}}
+{{- if strings.HasPrefix $src "/" -}}
+  {{- $src = path.Join $prefix $src -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}>

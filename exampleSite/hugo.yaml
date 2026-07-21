@@ -1,4 +1,4 @@
-baseURL: "https://hericmar.github.io/hugo-signature"
+baseURL: "https://example.com/"
 title: "John Doe"
 theme: "signature"
 
