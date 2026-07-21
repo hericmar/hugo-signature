@@ -1,0 +1,69 @@
+{{- /*
+  Self-hosted webfonts.
+
+  Each face is downloaded from the Fontsource CDN at BUILD time via
+  resources.GetRemote, then fingerprinted and served from this site's own
+  origin. Consequences:
+    - Visitors never contact a third party, so no IP is leaked (no Google
+      Fonts, no jsDelivr at runtime).
+    - Files publish under stable, readable paths (/fonts/archivo-400-normal.woff2).
+      Every face is preloaded with a Subresource Integrity hash on the <link>,
+      so the browser verifies the bytes before using them. Preloading is the
+      only way to attach SRI to a font — a CSS `src:url()` cannot carry it —
+      which is why every face gets a <link> rather than just the critical ones.
+      NOTE: because the URL does not change when the font does, do NOT serve
+      these `immutable`. Use a revalidating policy, e.g.
+      `Cache-Control: public, max-age=604800, must-revalidate`, or bump the
+      filename by hand when a face is replaced.
+    - The build fails loudly (errorf) if a font can't be fetched, rather than
+      silently shipping a page with missing fonts.
+
+  To add or drop a weight, edit $faces below. Keep the list tight: every face
+  here is fetched eagerly on every page, so an unused weight is wasted
+  bandwidth on first paint.
+*/ -}}
+{{- $base := "https://cdn.jsdelivr.net/npm" -}}
+{{- /* Each face lists only what varies. The Fontsource URL is derived below
+       from family + weight + style. Defaults: style "normal", subset "latin"
+       — so a plain roman face is a one-liner.
+
+       Setting "axis" (e.g. "wght") switches that face to the variable font
+       from @fontsource-variable, where one file covers a whole weight range;
+       "weight" then takes CSS range syntax ("100 900") instead of a number.
+       Only worth it above ~3 weights of one family — below that the variable
+       file is larger than the statics it replaces. */ -}}
+{{- $faces := slice
+  (dict "family" "Newsreader"     "weight" 400)
+  (dict "family" "Newsreader"     "weight" 500)
+  (dict "family" "Archivo"        "weight" "100 900" "axis" "wght")
+  (dict "family" "Archivo"        "weight" 400 "style" "italic")
+  (dict "family" "JetBrains Mono" "weight" 400)
+-}}
+{{- $css := slice -}}
+{{- $preloads := slice -}}
+{{- range $face := $faces -}}
+  {{- $style := $face.style | default "normal" -}}
+  {{- $subset := $face.subset | default "latin" -}}
+  {{- $axis := $face.axis | default "" -}}
+  {{- $id := replace (lower $face.family) " " "-" -}}
+  {{- /* Variable faces live in a separate package and are keyed by axis name
+         ("wght") where static faces are keyed by weight number ("400"). */ -}}
+  {{- $pkg := cond (ne $axis "") "@fontsource-variable" "@fontsource" -}}
+  {{- $seg := cond (ne $axis "") $axis (printf "%v" $face.weight) -}}
+  {{- $url := printf "%s/%s/%s/files/%s-%s-%s-%s.woff2" $base $pkg $id $id $subset $seg $style -}}
+  {{- $r := try (resources.GetRemote $url) -}}
+  {{- with $r.Err -}}
+    {{- errorf "fonts.html: fetching %s: %s" $url . -}}
+  {{- else with $r.Value -}}
+    {{- $file := . | resources.Copy (printf "/fonts/%s-%s-%s.woff2" $id $seg $style) -}}
+    {{- $css = $css | append (printf "@font-face {\n    font-family: %q;\n    font-style: %s;\n    font-weight: %v;\n    font-display: swap;\n    src: url(%q) format(\"woff2\");\n}" $face.family $style $face.weight $file.RelPermalink) -}}
+    {{- $integrity := (. | fingerprint).Data.Integrity -}}
+    {{- $preloads = $preloads | append (printf "<link rel=\"preload\" as=\"font\" type=\"font/woff2\" crossorigin integrity=%q href=%q>" $integrity $file.RelPermalink) -}}
+  {{- else -}}
+    {{- errorf "fonts.html: empty response for %s" $url -}}
+  {{- end -}}
+{{- end -}}
+{{- delimit $preloads "\n" | safeHTML }}
+<style>
+{{ delimit $css "\n\n" | safeCSS }}
+</style>
