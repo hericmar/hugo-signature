@@ -7,4 +7,9 @@
 <style>
     {{- $stylesheet := resources.Get "style.css" | minify -}}
     {{- $stylesheet.Content | safeCSS }}
+    {{- /* Syntax colours load after the base sheet so `.chroma` can clear the
+           code block background that `.post-body pre` sets. */ -}}
+    {{- with resources.Get "syntax.css" -}}
+        {{- (. | minify).Content | safeCSS }}
+    {{- end }}
 </style>

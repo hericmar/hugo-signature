@@ -329,6 +329,17 @@ a {
             margin: var(--space-2) 0 0 0;
         }
 
+        /* Markdown wraps list items in <p> for "loose" lists (items separated
+           by blank lines), and Hugo always does it for footnotes. Without this
+           those items get the paragraph gap on top of the list gap. */
+        li > p {
+            margin: 0;
+        }
+
+        li > p + p {
+            margin-top: var(--space-2);
+        }
+
         h2, h3, h4, h5 {
             margin: 40px 0 var(--space-4) 0;
 
@@ -351,15 +362,86 @@ a {
             border: var(--border-thin) solid var(--border-subtle);
             border-radius: var(--radius-md);
 
-
             white-space: pre;
         }
 
         pre code {
-            color: var(--text-primary);
             font-family: var(--font-mono);
             font-size: 0.875rem;
             line-height: 1.6;
+        }
+
+        /* Tables. Markdown emits no wrapper element, so the table itself is the
+           scroll container — a wide table scrolls on its own rather than making
+           the whole page scroll sideways. */
+        table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            margin: 0 0 var(--space-5) 0;
+            border-collapse: collapse;
+
+            color: var(--text-secondary);
+            font-size: var(--text-body);
+            line-height: var(--leading-body);
+        }
+
+        th, td {
+            padding: var(--space-2) var(--space-3);
+            border-bottom: var(--border-thin) solid var(--border-subtle);
+            text-align: left;
+        }
+
+        /* Outer edges sit flush with the text column. */
+        th:first-child, td:first-child { padding-left: 0; }
+        th:last-child,  td:last-child  { padding-right: 0; }
+
+        th {
+            color: var(--text-primary);
+            font-weight: var(--weight-medium);
+            border-bottom-color: var(--border-strong);
+        }
+
+        /* Per-column alignment from the `---:` markdown syntax needs no rule
+           here: Goldmark emits it as an inline style, which already wins over
+           the text-align above. */
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        hr {
+            margin: var(--space-7) 0;
+            border: 0;
+            border-top: var(--border-thin) solid var(--border-subtle);
+        }
+
+        /* Footnotes — quieter and tighter than body prose. */
+        .footnotes {
+            margin-top: var(--space-7);
+
+            color: var(--text-tertiary);
+            font-size: var(--text-meta);
+        }
+
+        .footnotes hr {
+            margin: 0 0 var(--space-4) 0;
+        }
+
+        .footnotes ol {
+            margin-bottom: 0;
+
+            color: inherit;
+            font-size: inherit;
+        }
+
+        .footnotes p {
+            color: inherit;
+            font-size: inherit;
+        }
+
+        .footnote-backref {
+            margin-left: var(--space-1);
         }
     }
 

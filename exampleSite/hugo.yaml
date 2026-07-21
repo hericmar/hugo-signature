@@ -1,0 +1,34 @@
+baseURL: "https://example.org/"
+title: "John Doe"
+theme: "signature"
+
+# Emit CSS classes instead of inline styles so the theme's assets/syntax.css
+# controls code colours. Must live in the site config — Hugo does not merge
+# `markup` from a theme's own config.
+markup:
+  highlight:
+    noClasses: false
+    tabWidth: 4
+    lineNos: false
+    guessSyntax: false
+
+params:
+  subtitle: "Software Engineer"
+  description: "I build backend systems and write about them. Based in Berlin, working mostly on infrastructure."
+
+  projects:
+    - title: "Waypoint"
+      description: "Self-hosted deploy pipeline for small teams."
+      url: "https://example.com/waypoint"
+    - title: "ledger.diff"
+      description: "A CLI for reviewing schema migrations before they run."
+      url: "https://example.com/ledger-diff"
+    - title: "shelf"
+      description: "Local-first note tool with plain-text sync."
+      url: "https://example.com/shelf"
+
+  elsewhere:
+    - title: "github.com/github"
+      url: "https://github.com/github"
+    - title: "github@example.com"
+      url: "mailto:jkade@example.com"
