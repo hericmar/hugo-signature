@@ -133,6 +133,26 @@ main {
     padding: var(--space-9) var(--space-5);
 }
 
+/* Shares the content column with main. No top padding — the gap comes from
+   main's bottom padding, so the footer does not double it. */
+.footer {
+    max-width: var(--width-content);
+    margin: 0 auto;
+
+    padding: 0 var(--space-5) var(--space-6);
+
+    color: var(--text-disabled);
+    font-size: var(--text-meta);
+}
+
+.footer a {
+    color: inherit;
+}
+
+.footer a:hover {
+    color: var(--text-secondary);
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
 
