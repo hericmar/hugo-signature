@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>John Doe</title><link>https://hericmar.github.io/hugo-signature/</link><description>Recent content on John Doe</description><generator>Hugo</generator><language>en</language><lastBuildDate>Tue, 21 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://hericmar.github.io/hugo-signature/index.xml" rel="self" type="application/rss+xml"/><item><title>Every markdown feature, rendered</title><link>https://hericmar.github.io/hugo-signature/writing/markdown-reference/</link><pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate><guid>https://hericmar.github.io/hugo-signature/writing/markdown-reference/</guid><description>&lt;p&gt;This page exists to exercise the theme. It renders every markdown construct
+Hugo supports out of the box, so any styling gap shows up in one place rather
+than being discovered later in a real post.&lt;/p&gt;
+&lt;h2 id="headings"&gt;Headings&lt;/h2&gt;
+&lt;p&gt;The page title above is the only &lt;code&gt;h1&lt;/code&gt;. Body content starts at level two.&lt;/p&gt;
+&lt;h2 id="second-level-heading"&gt;Second-level heading&lt;/h2&gt;
+&lt;h3 id="third-level-heading"&gt;Third-level heading&lt;/h3&gt;
+&lt;h4 id="fourth-level-heading"&gt;Fourth-level heading&lt;/h4&gt;
+&lt;h5 id="fifth-level-heading"&gt;Fifth-level heading&lt;/h5&gt;
+&lt;h2 id="text-formatting"&gt;Text formatting&lt;/h2&gt;
+&lt;p&gt;Running copy can be &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, &lt;em&gt;&lt;strong&gt;bold and italic&lt;/strong&gt;&lt;/em&gt;, or
+&lt;del&gt;struck through&lt;/del&gt;. Inline &lt;code&gt;code&lt;/code&gt; sits in the monospace face, and a
+&lt;a href="https://hericmar.github.io/hugo-signature/writing/moving-off-kubernetes/"&gt;link to another post&lt;/a&gt; points inside the site
+while &lt;a href="https://gohugo.io/"&gt;an external link&lt;/a&gt; leaves it. Bare URLs autolink too:
+&lt;a href="https://gohugo.io/documentation/"&gt;https://gohugo.io/documentation/&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>A smaller way to think about queues</title><link>https://hericmar.github.io/hugo-signature/writing/smaller-way-to-think-about-queues/</link><pubDate>Sat, 02 May 2026 00:00:00 +0000</pubDate><guid>https://hericmar.github.io/hugo-signature/writing/smaller-way-to-think-about-queues/</guid><description>&lt;p&gt;Most queue outages I have debugged were not throughput problems. They were
+someone discovering, at the worst possible moment, that a job was not
+idempotent.&lt;/p&gt;
+&lt;h2 id="two-properties-worth-more-than-speed"&gt;Two properties worth more than speed&lt;/h2&gt;
+&lt;p&gt;If a job can run twice without harm and can be dropped without silent data
+loss, almost every other operational question becomes easy. Retries stop being
+frightening, and you can restart a worker mid-flight without paging anyone.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;UPDATE jobs SET state = &amp;#39;pending&amp;#39;
+WHERE state = &amp;#39;running&amp;#39; AND heartbeat &amp;lt; now() - interval &amp;#39;5 minutes&amp;#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That one statement replaces a surprising amount of machinery.&lt;/p&gt;</description></item><item><title>Why we moved off Kubernetes</title><link>https://hericmar.github.io/hugo-signature/writing/moving-off-kubernetes/</link><pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate><guid>https://hericmar.github.io/hugo-signature/writing/moving-off-kubernetes/</guid><description>&lt;p&gt;Two years ago we ran a fifteen-node cluster to serve a workload that, in
+hindsight, never needed one. This is the story of why we tore it down and what
+replaced it.&lt;/p&gt;
+&lt;h2 id="the-workload"&gt;The workload&lt;/h2&gt;
+&lt;p&gt;Most of our traffic is bursty but predictable: a handful of scheduled jobs and
+a low-volume API. None of it needed autoscaling across machines — it needed
+autoscaling across a single machine&amp;rsquo;s cores, which is a &lt;em&gt;much&lt;/em&gt; simpler problem.&lt;/p&gt;</description></item></channel></rss>
