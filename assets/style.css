@@ -21,8 +21,8 @@
     --orange-100: #FBE2CF; /* accent tint — chips, selected fill */
 
     /* ---- Semantic aliases ---- */
-    --bg-page:          white;
-    --bg-surface:       var(--paper-0);
+    --bg-page:          var(--paper-0);
+    --bg-surface:       var(--paper-50);
     --bg-surface-hover: var(--paper-100);
     --border-subtle:    var(--paper-200);
     --border-strong:    var(--paper-300);
@@ -47,10 +47,6 @@
     --font-body:    "Archivo", -apple-system, "Segoe UI", sans-serif;
     --font-mono:    "JetBrains Mono", "SF Mono", monospace;
 
-    /* Type scale — deliberately asymmetric: one dominant display size, then a
-        single running-copy size, then one small meta size. No mid-size "H2/H3"
-        ladder and no cluster of near-identical small sizes — hierarchy comes
-        from weight/color, not from stacking similar sizes. */
     --text-display: 2rem; /* @kind other */
     --text-title:   1.095rem;  /* role / title line — body size, medium weight */
     --text-body:    1.0rem;  /* running copy */

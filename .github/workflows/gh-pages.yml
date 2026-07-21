@@ -1,0 +1,46 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+# peaceiris/actions-gh-pages pushes to the gh-pages branch with GITHUB_TOKEN.
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          # The theme needs >= 0.146 for layouts/_partials and >= 0.141 for the
+          # `try` keyword used in layouts/_partials/fonts.html.
+          hugo-version: 'latest'
+          extended: true
+
+      # This repository IS the theme, so there is no themes/ directory for Hugo
+      # to look in. Link the checkout in under the name exampleSite/hugo.yaml
+      # expects ("signature"), outside the repo so the tree cannot recurse.
+      - name: Build
+        run: |
+          mkdir -p /tmp/themes
+          ln -s "$GITHUB_WORKSPACE" /tmp/themes/signature
+          hugo --source exampleSite \
+               --themesDir /tmp/themes \
+               --baseURL "https://hericmar.github.io/hugo-signature/" \
+               --minify --gc
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./exampleSite/public
