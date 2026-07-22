@@ -64,7 +64,7 @@
     --tracking-display: -0.01em;
     --tracking-meta:    0.08em;  /* wide tracking on uppercase mono/meta only */
 
-    --weight-thin:     300;
+    --weight-light:    300;
     --weight-regular:  400;
     --weight-medium:   500;
     --weight-semibold: 600;
@@ -144,6 +144,16 @@ main {
     padding: var(--space-9) var(--space-5);
 }
 
+@media (max-width: 640px) {
+    main {
+        padding: var(--space-9) 20px;
+    }
+
+    main.post {
+        padding-top: var(--space-6);
+    }
+}
+
 /* Shares the content column with main. No top padding — the gap comes from
    main's bottom padding, so the footer does not double it. */
 footer {
@@ -189,7 +199,7 @@ a {
 .text-subtle {
     color: var(--text-tertiary);
     font-size: var(--text-body);
-    font-weight: var(--weight-thin);
+    font-weight: var(--weight-light);
 }
 
 /* ---- Components ---- */
