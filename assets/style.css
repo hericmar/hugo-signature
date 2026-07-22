@@ -114,9 +114,14 @@
 
 /* ---- Base theme layout ---- */
 body {
-    height: 100%;
     width: 100%;
+
+    /* iOS Safari counts 100vh as the viewport with the browser chrome hidden,
+       so it overshoots the visible area and drops the footer below the fold.
+       svh is that area minus the chrome; the vh line is the fallback for
+       browsers without viewport-unit support (pre-iOS 15.4 / Chrome 108). */
     min-height: 100vh;
+    min-height: 100svh;
 
     display: flex;
     flex-direction: column;
