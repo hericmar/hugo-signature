@@ -2,6 +2,8 @@
 
 A minimal single-page Hugo theme: a heading, a few sections, and a writing list.
 
+![](images/screenshot.png)
+
 ## Use
 
 Add the theme and enable it in your site config:

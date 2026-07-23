@@ -30,5 +30,5 @@ params:
   elsewhere:
     - title: "github.com/github"
       url: "https://github.com/github"
-    - title: "github@example.com"
-      url: "mailto:jkade@example.com"
+    - title: "you@example.com"
+      url: "mailto:you@example.com"
