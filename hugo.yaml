@@ -1,4 +1,5 @@
 # Theme configuration (merged into the site config).
+min_version: "0.141"
 
 disableKinds: [taxonomy, term, taxonomyTerm]
 
