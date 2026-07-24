@@ -1,5 +1,7 @@
 # Theme configuration (merged into the site config).
 
+disableKinds: [taxonomy, term, taxonomyTerm]
+
 # Register woff2 so resources.GetRemote can resolve the media type of the
 # self-hosted webfonts fetched in layouts/_partials/fonts.html.
 mediaTypes:

@@ -330,6 +330,10 @@ a {
             line-height: var(--leading-body);
         }
 
+        img {
+            max-width: 100%;
+        }
+
         /* Prose links carry a persistent underline — inline in a paragraph
            there is no other cue, so hover-only affordance is not enough. */
         a {
