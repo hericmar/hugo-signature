@@ -113,6 +113,11 @@
 }
 
 /* ---- Base theme layout ---- */
+
+html {
+    scrollbar-gutter: stable;
+}
+
 body {
     width: 100%;
 
